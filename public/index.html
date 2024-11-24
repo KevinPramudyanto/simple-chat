@@ -9,13 +9,30 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        font-size: 20px;
+      }
+      html {
+        height: 100%;
       }
       body {
+        height: 100%;
+        background: black;
+      }
+      #messages {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        height: 100dvh;
-        background: black;
+        justify-content: flex-start;
+        gap: 1rem;
+        padding: 1rem;
+        height: calc(100vh - 4rem);
+        overflow-y: auto;
+      }
+      #messages > div {
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        background: rgba(0, 255, 0, 0.1);
+        color: white;
+        word-wrap: break-word;
       }
       #form {
         display: flex;
@@ -43,14 +60,6 @@
         border-radius: 1rem;
         background: blue;
         color: #fff;
-      }
-      #messages > div {
-        margin: 1rem;
-        padding: 0.5rem 1rem;
-        border-radius: 0.5rem;
-        background: rgba(0, 255, 0, 0.1);
-        color: white;
-        word-wrap: break-word;
       }
     </style>
   </head>
@@ -81,7 +90,7 @@
         const div = document.createElement("div");
         div.textContent = msg;
         messages.appendChild(div);
-        window.scrollTo(0, document.body.scrollHeight);
+        messages.scrollTop = messages.scrollHeight;
       });
     </script>
   </body>
