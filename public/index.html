@@ -10,22 +10,24 @@
         padding: 0;
         box-sizing: border-box;
         font-size: 20px;
+        font-family: Helvetica, sans-serif;
       }
       html {
         height: 100%;
       }
       body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         height: 100%;
         background: black;
       }
       #messages {
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
         gap: 1rem;
+        width: 100%;
         padding: 1rem;
-        height: calc(100vh - 4rem);
-        overflow-y: auto;
       }
       #messages > div {
         padding: 0.5rem 1rem;
@@ -37,10 +39,6 @@
       #form {
         display: flex;
         gap: 1rem;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
         padding: 1rem;
         background: rgba(255, 255, 255, 0.2);
         backdrop-filter: blur(5px);
@@ -90,7 +88,7 @@
         const div = document.createElement("div");
         div.textContent = msg;
         messages.appendChild(div);
-        messages.scrollTop = messages.scrollHeight;
+        window.scrollTo(0, document.body.scrollHeight);
       });
     </script>
   </body>
