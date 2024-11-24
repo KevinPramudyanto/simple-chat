@@ -12,14 +12,7 @@
         font-size: 20px;
         font-family: Helvetica, sans-serif;
       }
-      html {
-        height: 100%;
-      }
       body {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 100%;
         background: black;
       }
       #messages {
@@ -28,22 +21,30 @@
         gap: 1rem;
         width: 100%;
         padding: 1rem;
+        margin-bottom: 9rem;
       }
       #messages > div {
         padding: 0.5rem 1rem;
         border-radius: 0.5rem;
-        background: rgba(0, 255, 0, 0.1);
+        background: rgba(0, 0, 255, 0.1);
         color: white;
         word-wrap: break-word;
       }
       #form {
         display: flex;
-        gap: 1rem;
-        padding: 1rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        padding: 0.5rem;
         background: rgba(255, 255, 255, 0.2);
         backdrop-filter: blur(5px);
       }
-      #input {
+      #input,
+      #username {
+        width: 100%;
         padding: 0.5rem 1rem;
         flex-grow: 1;
         border: none;
@@ -55,8 +56,8 @@
       #send {
         padding: 0.5rem 1rem;
         border: none;
-        border-radius: 1rem;
-        background: blue;
+        border-radius: 0.5rem;
+        background: black;
         color: #fff;
       }
     </style>
@@ -64,6 +65,7 @@
   <body>
     <div id="messages"></div>
     <form id="form">
+      <input id="username" autocomplete="off" placeholder="Your name..." />
       <input id="input" autocomplete="off" placeholder="Type a message..." />
       <button id="send">SEND</button>
     </form>
@@ -79,7 +81,10 @@
       form.addEventListener("submit", (event) => {
         event.preventDefault();
         if (input.value) {
-          socket.emit("chat message", input.value);
+          socket.emit(
+            "chat message",
+            (username.value || "[name]") + " : " + input.value
+          );
           input.value = "";
         }
       });
